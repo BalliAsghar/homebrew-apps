@@ -15,10 +15,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Grab SHA256
         id: sha256
-        env:
-          VERSION: ${{ steps.latest_release.outputs.release }}
-        run: |
-          echo "::set-output name=sha256::$(curl -sL https://github.com/BalliAsghar/killport/archive/refs/tags/${VERSION}.tar.gz | sha256sum | cut -d ' ' -f 1)"
+        run: sha256=$(curl -sL https://github.com/BalliAsghar/killport/archive/refs/tags/${{ steps.latest_release.outputs.release  }}.tar.gz | sha256sum | cut -d ' ' -f 1)" >> $GITHUB_OUTPUT
       - name: Update Formula File
         env:
           SHA256: ${{ steps.sha256.outputs.sha256 }}
