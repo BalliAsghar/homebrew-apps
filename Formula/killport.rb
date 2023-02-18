@@ -6,7 +6,7 @@ class Killport < Formula
   license "MIT"
 
   def install
-    bin.install "killport.sh" => "killport"
+    bin.install "killport"
   end
 
   test do
