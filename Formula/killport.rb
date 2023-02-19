@@ -1,8 +1,8 @@
 class Killport < Formula
   desc "Kill a process running on a specific port"
   homepage "https://github.com/BalliAsghar/killport"
-  url "https://github.com/BalliAsghar/killport/archive/refs/tags/v1.2.2.tar.gz"
-  sha256 "1686f8b58f3cf318fae39f85ff2e1c7d04a3d4d0fd6a863767a8205224b0585a"
+  url "https://github.com/BalliAsghar/killport/archive/refs/tags/v2.0.0.tar.gz"
+  sha256 "bff9d271fdb9bac92fe0a6883eebea237578aae87e856b771056e4a4cfd34039"
   license "MIT"
 
   def install
