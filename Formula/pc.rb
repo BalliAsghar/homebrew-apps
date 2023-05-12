@@ -1,4 +1,4 @@
-class pc < Formula
+class Pc < Formula
   desc "partial clone Git repository"
   homepage "https://github.com/BalliAsghar/partial-clone"
   url "https://github.com/BalliAsghar/partial-clone/archive/refs/tags/v1.0.0.tar.gz"
