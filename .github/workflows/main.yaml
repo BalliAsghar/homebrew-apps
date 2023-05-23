@@ -1,0 +1,43 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        type: string
+        description: The repository to release
+        required: true
+      formula:
+        type: string
+        description: The formula file name
+        required: true
+jobs:
+    Release:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v3
+          - name: Latest Release
+            id: latest_release
+            uses: pozetroninc/github-action-get-latest-release@master
+            with:
+              repository: ${{ github.event.inputs.repo }}
+              token: ${{ secrets.GITHUB_TOKEN }}
+          - name: Get SHA256
+            env:
+              VERSION: ${{ steps.latest_release.outputs.release }}
+              REPO: ${{ github.event.inputs.repo }}
+            run: |
+              echo "sha256=$(curl -sL curl -sL https://github.com/${REPO}/archive/refs/tags/${VERSION}.tar.gz | sha256sum | cut -d ' ' -f 1)" >> $GITHUB_ENV
+          - name: Update Formula File
+            env:
+              SHA256: ${{ env.sha256 }}
+              VERSION: ${{ steps.latest_release.outputs.release }}
+              formula: ${{ github.event.inputs.formula }}
+            working-directory: Formula
+            run: |
+              sed -i "s/refs\/tags\/v[0-9]\+\.[0-9]\+\.[0-9]\+/refs\/tags\/${VERSION}/" $formula
+              sed -i "s/sha256 \"[a-z0-9]\+\"/sha256 \"${SHA256}\"/" $formula
+          - name: Commit Changes
+            uses: stefanzweifel/git-auto-commit-action@v4
+            with:
+              commit_message: "Automated Change: Update ${{ github.event.inputs.formula }} to ${{ steps.latest_release.outputs.release }}"
