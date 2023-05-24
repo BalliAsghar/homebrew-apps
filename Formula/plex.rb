@@ -9,7 +9,7 @@ class Plex < Formula
 
   def install
     # Install Python dependencies, click, "plexapi",
-    system "pip3", "install", "click", "plexapi"
+    system "pip3", "install", "click", "plexapi", "keyrings.cryptfile"
     # Install the script
     bin.install "plex" => "plex"
   end
