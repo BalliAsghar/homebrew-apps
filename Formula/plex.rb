@@ -1,8 +1,8 @@
 class Plex < Formula
   desc "Download Media from Plex"
   homepage "https://github.com/BalliAsghar/DownPlex"
-  url "https://github.com/BalliAsghar/DownPlex/archive/refs/tags/v2.0.8.tar.gz"
-  sha256 "44a9b09c7f9a5a6209bcf172c598f976cc3cc49fd281fab2638cec31c0ad0f70"
+  url "https://github.com/BalliAsghar/DownPlex/archive/refs/tags/v3.0.0.tar.gz"
+  sha256 "449d504846c18db3c122f926d3b11af807f2d7e5cd3ebb357e3a87d8e745df84"
   license "MIT"
 
   depends_on "python@3.11"
